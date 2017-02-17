@@ -19,7 +19,7 @@
 			<key>isStaticText</key>
 			<true/>
 			<key>label</key>
-			<string>发送到朋友圈时自动屏蔽消息来源者</string>
+			<string>Forward_timeline_Protect_Body</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -31,7 +31,7 @@
 			<key>key</key>
 			<string>com.susnm.enableProtectiveBody</string>
 			<key>label</key>
-			<string>开启</string>
+			<string>Enable</string>
 			<key>PostNotification</key>
 			<string>com.susnm.WXHook-preferencesChanged</string>
 		</dict>
@@ -41,7 +41,51 @@
 			<key>isStaticText</key>
 			<true/>
 			<key>label</key>
-			<string>截图时快速转发到朋友圈</string>
+			<string>Timeline_Forward_Exclude_Friend</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<string>YES</string>
+			<key>defaults</key>
+			<string>com.susnm.WXHook</string>
+			<key>key</key>
+			<string>com.susnm.enableExcludeFriendWhenForwardTimeline</string>
+			<key>label</key>
+			<string>Enable</string>
+			<key>PostNotification</key>
+			<string>com.susnm.WXHook-preferencesChanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>isStaticText</key>
+			<true/>
+			<key>label</key>
+			<string>InSafari</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<string>YES</string>
+			<key>defaults</key>
+			<string>com.susnm.WXHook</string>
+			<key>key</key>
+			<string>com.susnm.enableInSafari</string>
+			<key>label</key>
+			<string>Enable</string>
+			<key>PostNotification</key>
+			<string>com.susnm.WXHook-preferencesChanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>isStaticText</key>
+			<true/>
+			<key>label</key>
+			<string>Quilkly_Forward_Screenshot_To_Friends_And_Timeline</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -53,7 +97,7 @@
 			<key>key</key>
 			<string>com.susnm.enableScreenshotForward</string>
 			<key>label</key>
-			<string>开启</string>
+			<string>Enable</string>
 			<key>PostNotification</key>
 			<string>com.susnm.WXHook-preferencesChanged</string>
 		</dict>
@@ -63,7 +107,7 @@
 			<key>isStaticText</key>
 			<true/>
 			<key>label</key>
-			<string>单次红包统计最大请求次数</string>
+			<string>Max_Request_Info_For_Red_Packets_Times_With_One_Calculate</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -89,7 +133,7 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>footerText</key>
-			<string>一次请求可获取11个红包数据。默认最大请求次数为15次，165个数据，可统计165个红包的收入或支出。以此类推</string>
+			<string>Max_Request_Info_Description</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -97,7 +141,55 @@
 			<key>isStaticText</key>
 			<true/>
 			<key>label</key>
-			<string>微信步数，胜者为王</string>
+			<string>Input_Spaces_For_A_New_Line</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<string>YES</string>
+			<key>defaults</key>
+			<string>com.susnm.WXHook</string>
+			<key>key</key>
+			<string>com.susnm.enableInputSpacesNewLine</string>
+			<key>label</key>
+			<string>Enable</string>
+			<key>PostNotification</key>
+			<string>com.susnm.WXHook-preferencesChanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<integer>4</integer>
+			<key>defaults</key>
+			<string>com.susnm.WXHook</string>
+			<key>key</key>
+			<string>com.susnm.numberOfSpacesWithNewLine</string>
+			<key>min</key>
+			<integer>2</integer>
+			<key>max</key>
+			<integer>7</integer>
+			<key>showValue</key>
+			<true/>
+			<key>isSegmented</key>
+			<true/>
+			<key>PostNotification</key>
+			<string>com.susnm.WXHook-preferencesChanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Automatic_New_Line_With_Input_Spaces</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>isStaticText</key>
+			<true/>
+			<key>label</key>
+			<string>WX_Number_Of_Steps</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -109,13 +201,15 @@
 			<key>key</key>
 			<string>com.susnm.enableAnyDayStep</string>
 			<key>label</key>
-			<string>开启</string>
+			<string>Enable</string>
 			<key>PostNotification</key>
 			<string>com.susnm.WXHook-preferencesChanged</string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSEditTextCell</string>
+			<key>isNumeric</key>
+			<true/>
 			<key>default</key>
 			<string>6666</string>
 			<key>defaults</key>
@@ -123,9 +217,9 @@
 			<key>key</key>
 			<string>com.susnm.AnyDayStep</string>
 			<key>label</key>
-			<string>每日步数</string>
+			<string>Day_Number_Of_Steps</string>
 			<key>placeholder</key>
-			<string>输入任意整数步数（最大98800）</string>
+			<string>Input_Any_Integer_Number_Of_Steps</string>
 			<key>PostNotification</key>
 			<string>com.susnm.WXHook-preferencesChanged</string>
 		</dict>

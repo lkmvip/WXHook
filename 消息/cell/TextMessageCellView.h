@@ -25,7 +25,6 @@
     TextFloatPreview *m_floatPreview;
 }
 
-- (void).cxx_destruct;
 - (void)actionSheet:(id)arg1 clickedButtonAtIndex:(long long)arg2;
 - (void)actionSheet:(id)arg1 didDismissWithButtonIndex:(long long)arg2;
 - (_Bool)canBeReused;

@@ -8,6 +8,31 @@
 #import <UIKit/UIKit.h>
 
 #pragma mark- 配置
+CHOptimizedMethod1(self, BOOL, MicroMessengerAppDelegate, applicationDidBecomeActive, id, arg1) {
+  CHSuper1(MicroMessengerAppDelegate, applicationDidBecomeActive, arg1);
+  NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile: WXPreferencesFile];
+  int inputSpaceCountL = [[prefs objectForKey:numberOfSpacesWithNewLine] intValue];
+  inputSpaceCount = inputSpaceCountL == 0 ? inputSpaceCount : inputSpaceCountL;
+}
+
+CHDeclareClassMethod0(BOOL, MicroMessengerAppDelegate, isEnableExcludeWhenInTimeline) {
+  NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile: WXPreferencesFile];
+  BOOL isEnableExcludeWhenInTimeline = [[prefs objectForKey:enableExcludeWhenInTimeline] boolValue];
+  return isEnableExcludeWhenInTimeline;
+}
+
+CHDeclareClassMethod0(BOOL, MicroMessengerAppDelegate, isEnableInputSpacesNewLine) {
+  NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile: WXPreferencesFile];
+  BOOL isEnableInputSpacesNewLine = [[prefs objectForKey:enableInputSpacesNewLine] boolValue];
+  return isEnableInputSpacesNewLine;
+}
+
+CHDeclareClassMethod0(BOOL, MicroMessengerAppDelegate, isEnableInSafari) {
+  NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile: WXPreferencesFile];
+  BOOL isEnableInSafari = [[prefs objectForKey:enableInSafari] boolValue];
+  return isEnableInSafari;
+}
+
 CHDeclareClassMethod0(BOOL, MicroMessengerAppDelegate, isEnbProBody) {
   NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile: WXPreferencesFile];
   BOOL isEnbProBody = [[prefs objectForKey:enableProtectiveBodyKey] boolValue];

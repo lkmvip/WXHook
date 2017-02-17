@@ -29,18 +29,19 @@ static KarenLocalizer *karenLocalizer = [[KarenLocalizer alloc] initWithKarenLoc
 
 #pragma mark- 快速截图分享
 static void userDidTakeScreenshot(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
+
+  WXLog(@"wxhook===14 get user did screenshot notification==userDidTakeScreenshot");
   UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
-  if (pasteBoard) {
+  WXLog(@"wxhook===15 UIPasteboard: %@", pasteBoard);
+  
+  if (!CHClass(SpringBoard) && [pasteBoard image] && [CHClass(MicroMessengerAppDelegate) isEnbScreenshotForward]) {
     UIImage *image = [pasteBoard image];
-    
-    if (!image || !CHAlloc(MMImage) || ![CHClass(MicroMessengerAppDelegate) isEnbScreenshotForward]) {
-      return;
-    }
-    
+    WXLog(@"wxhook===16 get image : %@", image);
+    WXLog(@"wxhook===18 begin forward screenshot");
     UIViewController *showVC = [CHClass(MicroMessengerAppDelegate) getCurrentShowViewController];
-    
+    WXLog(@"wxhook===19 getCurrentShowViewController: %@", showVC);
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle: [karenLocalizer karenLocalizeString:@"screenshot_forward"] message:[karenLocalizer karenLocalizeString:@"need_forward_screenshot"] preferredStyle:UIAlertControllerStyleAlert];
-    
+    WXLog(@"wxhook===20 alertVC: %@ \n", alertVC);
     // cancel action
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:[karenLocalizer karenLocalizeString:@"cancel_save_this_screenshot_to_pasteboard"] style:UIAlertActionStyleDestructive handler: nil];
     // forward timeline action
@@ -83,22 +84,29 @@ static void userDidTakeScreenshot(CFNotificationCenterRef center, void *observer
     [alertVC addAction:cancel];
     
     [showVC presentViewController:alertVC animated:YES completion:nil];
-  };
+  }
+  
 }
 
 #pragma mark- 截图时发出通知
 CHOptimizedMethod1(self, void, SBScreenshotManager, saveScreenshotsWithCompletion, id, arg1) {
   CHSuper1(SBScreenshotManager, saveScreenshotsWithCompletion, arg1);
-  
+  WXLog(@"wxhook===06 begin screenshot");
   SpringBoard *sprBod = [CHClass(SpringBoard) sharedApplication];
+  WXLog(@"wxhook===07 springboard: %@", sprBod);
   SBScreenshotManager *manager = [sprBod screenshotManager];
+  WXLog(@"wxhook===08 manager: %@", manager);
   SBScreenshotManagerDataSource *dataSource = [manager dataSource];
+  WXLog(@"wxhook===09 dataSource: %@", dataSource);
   UIScreen *screen = [UIScreen mainScreen];
   _SBMainScreenScreenshotProvider *provider = [manager _providerForScreen: screen];
+  WXLog(@"wxhook===10 privider: %@", provider);
   UIImage *image = [provider captureScreenshot];
-  
+  WXLog(@"wxhook===11 get image: %@", image);
   // notification
   UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+  WXLog(@"wxhook===12 get pasteboard for set image: %@", pasteBoard);
   [pasteBoard setImage:image];
+  WXLog(@"wxhook===13 will post screenshotNotification");
   PostNotification(screenshotNotification);
 }

@@ -42,6 +42,18 @@
 #pragma mark- 任意步数
 #import "AnyStep.mm"
 
+#pragma mark- 自发命令
+#import "SendMsgByMe.mm"
+
+#pragma mark- Safari浏览器
+#import "InSafari.mm"
+
+#pragma mark- 群内容导出视频到文件
+#import "GroupContentOutput.mm"
+
+#pragma mark- 转发朋友圈信息
+#import "ForwardMoments.mm"
+
 CHConstructor // code block that runs immediately upon load
 {
   @autoreleasepool
@@ -70,11 +82,11 @@ CHConstructor // code block that runs immediately upon load
     CHHook2(BaseMessageCellView, canPerformAction, withSender);
     
     CHLoadLateClass(TextMessageCellView);
+    CHHook2(TextMessageCellView, onLinkClicked, withRect);
     
     CHLoadLateClass(MMServiceCenter);
     CHLoadLateClass(WCFacade);
     
-    CHLoadLateClass(TextMessageCellView);
     CHLoadLateClass(ImageMessageCellView);
     CHLoadLateClass(VoiceMessageCellView);
     CHLoadLateClass(VideoMessageCellView);
@@ -89,6 +101,7 @@ CHConstructor // code block that runs immediately upon load
     CHHook0(JailBreakHelper, IsJailBreak);
     
     CHLoadLateClass(MicroMessengerAppDelegate);
+    CHHook1(MicroMessengerAppDelegate, applicationDidBecomeActive);
     
     CHLoadLateClass(SpringBoard);
   
@@ -128,9 +141,27 @@ CHConstructor // code block that runs immediately upon load
     CHLoadLateClass(CMessageMgr);
 //    CHHook1(CMessageMgr, onRevokeMsg);
     CHHook3(CMessageMgr, DelMsg, MsgList, DelAll);
+    CHHook2(CMessageMgr, AsyncOnAddMsg, MsgWrap);
     
     CHLoadLateClass(WCDeviceStepObject);
     CHHook0(WCDeviceStepObject, m7StepCount);
     CHHook0(WCDeviceStepObject, hkStepCount);
+    
+    CHLoadLateClass(MMGrowTextView);
+    
+    CHLoadLateClass(MsgResourceBrowseViewController);
+    CHLoadLateClass(SimpleMsgInfo);
+    
+    CHHook1(MsgResourceBrowseViewController, onDeleteSelectedData);
+    CHHook0(MsgResourceBrowseViewController, viewDidLoad);
+    
+    CHLoadLateClass(WCTimeLineCellView);
+    CHHook1(WCTimeLineCellView, onCommentPhoto);
+    
+    CHLoadLateClass(WCContentItem);
+    CHLoadLateClass(WCMediaItem);
+    CHLoadLateClass(WCImageCache);
+    CHLoadLateClass(CContactMgr);
+    
   }
 }
